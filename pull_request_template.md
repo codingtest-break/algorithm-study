@@ -1,9 +1,3 @@
----
-title: Pull Request Template
-category: post
-tags: Pull-Request PR git-flow git
----
-
 ### PR 생성 이유
 PR을 작성하는 이유에 대해서 이곳에 작성할 것.
 
