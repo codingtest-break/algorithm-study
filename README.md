@@ -27,7 +27,7 @@ IT 대기업 취업 준비 및 알고리즘적 사고 향상을 위한 자료구
 ## 스터디 진척도
 | 일자                    | 내용                                               | 발표자               | 과제  | 참여인원 |
 | ----------------------- | -------------------------------------------------- | -------------------- | ----- | -------- |
-| `TBD(To Be Determined)` | 1. 백준 기본 입출력 문제 확인<br> 2. 백트래킹 기초 | `신승찬`<br>`양정훈` | `TBD` |
+| `TBD(To Be Determined)` | 1. 백준 기본 입출력 문제 확인<br> 2. 백트래킹 기초 | `신승찬`<br>`양정훈` | `TBD` | `TBD`    |
    
 ## 스터디원
 - 양정훈
@@ -43,5 +43,6 @@ IT 대기업 취업 준비 및 알고리즘적 사고 향상을 위한 자료구
 ## 자료 및 레포 링크
   - [스터디 레포지토리](https://github.com/codingtest-break/algorithm-study)
   - [백준 그룹 문제집 리스트](https://www.acmicpc.net/group/workbook/14867)
-  - [Git-Flow 정의 및 GitKraken 활용법](git-flow.md)
+  - [Git 기초 및 활용법](./doc/git/git.md)
+  - [Git-Flow 정의 및 GitKraken 활용법](./doc/git/git-flow.md)
   - [Markdown 기본 문법](https://heropy.blog/2017/09/30/markdown/)
