@@ -61,6 +61,8 @@ tags: git git-flow study
         - [목적 : rebase-example 브랜치를 test 브랜치로 rebase 하기](#목적--rebase-example-브랜치를-test-브랜치로-rebase-하기)
         - [상황 : test 브랜치의 커밋에서 생성된 rebase-example 브랜치에서 작업을 하던 중, test에 다른 사람의 작업 사항이 머지됨](#상황--test-브랜치의-커밋에서-생성된-rebase-example-브랜치에서-작업을-하던-중-test에-다른-사람의-작업-사항이-머지됨)
   - [Pull Request(PR)](#pull-requestpr)
+      - [의미](#의미-14)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-14)
   - [참고자료](#참고자료)
 
 
@@ -197,8 +199,13 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
   - 기본적으로 브랜치를 checkout 했을 때, 디폴트로 가장 마지막 커밋을 가리키고 있는다.
   - 각 브랜치의 마지막 커밋이 아닌 개별적인 커밋을 보게되면 HEAD가 이동하게 된다.
 - Conflict
-- Origin
-- Upstream
+  - 코드가 충돌이 나는 상황
+  - 서로 다른 브랜치에서 같은 파일, 같은 라인에 다른 내용이 포함되어 있어서 코드를 자연스럽게 합치지 못하는 상황.
+  - Git의 입장에서는 어떤 코드를 버리고 어떤 코드를 가져가야 할 지 알 수 없기 때문에 사람이 직접 어떤 코드를 반영할지 수정해야 한다. 
+- Origin & Upstream
+  - 내 Github 계정에 있는 레포지토리를 origin이라고 한다.
+  - 처음 생성한 레포지토리 관리자가 나라면 upstream은 신경을 쓰지 않아도 된다.
+  - 만약 다른 레포지토리의 **collaborator**(해당 레포지토리에 코드를 반영할 수 있는 권한이 있는 사람)가 아니면, `fork`라는 기능으로 다른 사람의 레포지토리를 내 Github 레포지토리로 가져올 수 있는데, 이때 fork를 한 원래 레포지토리가 `upstream` fork 해서 내 계정 밑으로 생성된 레포지토리가 `origin`이 된다.
 ## 자주 쓰는 Git 명령어 설명
 - Git에서 명령어의 의미와, GitKraken에서 해당 명령어를 실행하는 방법으로 알아본다.
 ### GitKraken에서 Github 계정 연동 방법
@@ -427,7 +434,28 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
 3. **rebase-example 브랜치의 시작 커밋**이 **test 브랜치의 최신 커밋인 `Merge branch 'main' into test`** 로 변경된 것을 확인 할 수 있다.
 ![Rebase 3](../asset/image/git/git-rebase-4.jpg)
 ## Pull Request(PR)
-
+#### 의미
+- 내가 권한이 없는 프로젝트에 기여하고 싶을 때(코드 추가 및 수정, 번역 작업, 코멘트 추가 등등), 내가 수정한 변경사항의 반영을 요청하는 방법.
+- fork한 레포지토리에서 변경사항을 반영하고, 해당 변경사항들의 내용과 작업 이유 등등을 적어서, collaborator에게 반영해달라고 요청하게 된다.
+- 승인이 될 경우, 해당 코드가 반영이 되게 된다.
+- 주로 코드 리뷰를 하면서 협업을 할 때도 사용된다. 
+#### GitKraken에서 사용법
+1. PR(Pull Request)를 보낼 변경사항을 작업한 브랜치의 이름을 오른쪽 클릭한다.
+2. Push 브랜치이름 and start a pull request 클릭
+![PR 1](../asset/image/git/pr-1.png)
+3. Local 브랜치만 있는 경우 위의 dialog가 나오나, Submit을 눌러준다.(브랜치를 origin에 생성하게 된다)
+![PR 2](../asset/image/git/pr-2.png)
+4. 다음과 같은 창이 뜬다.
+5. To repo에 반영할 Repository를 선택한다.(주로 Upstream을 선택할 것이다.) 
+   1. 레포지토리 안에 `pull_request_template.md` 파일이 있는 경우 PR 내용을 템플릿화 해서 사용 가능하다.
+![PR 3](../asset/image/git/pr-3.png)
+6. 내용을 작성하고 Create Pull Request를 누른다.
+ ![PR 4](../asset/image/git/pr-4.jpg)
+7. Github에서 Pull requests 에서 내 PR을 확인 가능하다.(upstream에 PR을 날린경우, 내 레포가 아니라 연결된 원본 레포로 가서 확인할 수 있다.)  
+![PR 5](../asset/image/git/pr-5.jpg)
+![PR 6](../asset/image/git/pr-6.jpg)
+8. 잘 보이는 지 확인한다.
+![PR 7](../asset/image/git/pr-7.png)
 ## 참고자료
 - [Git 간편 안내서](https://rogerdudler.github.io/git-guide/index.ko.html)
 - [nomadcoder 강의](https://nomadcoders.co/git-for-beginners)
@@ -436,3 +464,4 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
 - [Git의 기본 개념들 (1)](https://velog.io/@janeljs/git-4)
 - [Git HEAD란 무엇인가?](https://kotlinworld.com/272)
 - [Git에 대한 내용 정리](https://dimdim.tistory.com/entry/GIT%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%B4%EC%9A%A9%EC%A0%95%EB%A6%AC-%EC%A0%95%EB%A6%AC%EC%A4%91)
+- [git의 upstream과 origin 헷갈리는 사람 손!](https://dev200ok.blogspot.com/2020/09/git-git-upstream-origin.html)
