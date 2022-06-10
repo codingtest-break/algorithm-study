@@ -37,6 +37,8 @@ tags: git git-flow study
       - [의미](#의미-6)
       - [GitKraken에서 사용법](#gitkraken에서-사용법-6)
     - [`git revert`](#git-revert)
+      - [의미](#의미-7)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-7)
     - [`git stash`](#git-stash)
     - [`git pop`](#git-pop)
     - [`git branch`](#git-branch)
@@ -283,6 +285,7 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
 - soft는 돌아갈 커밋까지의 변경사항들이 전부 staged된 상태로 돌아감.
 - mixed는 돌아갈 커밋까지의 변경사항들이 전부 unstaged된 상태로 돌아감.
 - hard는 돌아갈 커밋까지의 변경사항들을 전부 지워버림.
+- Revert와 비슷하지만 커밋 자체를 없애버리는 식으로 진행되는 것이기 때문에 다른 사람과 협업 시에 유의해야함.
 #### GitKraken에서 사용법
 1. reset 공통
    1. 돌아가고자 하는 커밋을 오른쪽 버튼으로 클릭
@@ -301,6 +304,11 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
    1. 돌아가고자 하는 커밋 이후의 변경사항들이 없어진 것을 확인 가능.
      ![Reset 4-3](../asset/image/git/git-reset-4-3.jpg)
 ### `git revert`
+#### 의미
+- 반영했던 커밋들을 취소하는 커밋을 생성해서 변경사항을 취소하는 명령어
+- Reset은 실제로 커밋을 삭제하지만 Revert는 취소 커밋을 생성하는 방식(무르기와 비슷함)
+- 여러명이 **같은 브랜치**에서 작업을 하고 있는 경우라면 Revert를 사용하는 것을 권장.
+#### GitKraken에서 사용법
 
 ### `git stash`
 
