@@ -40,8 +40,14 @@ tags: git git-flow study
       - [의미](#의미-7)
       - [GitKraken에서 사용법](#gitkraken에서-사용법-7)
     - [`git stash`](#git-stash)
+      - [의미](#의미-8)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-8)
     - [`git pop`](#git-pop)
+      - [의미](#의미-9)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-9)
     - [`git branch`](#git-branch)
+      - [의미](#의미-10)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-10)
     - [`git checkout`](#git-checkout)
     - [`git merge`](#git-merge)
     - [`git rebase`](#git-rebase)
@@ -317,11 +323,33 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
 4. 선택한 커밋의 변경사항들을 취소하는 커밋이 생성되는 것을 확인
 ![Revert 3](../asset/image/git/git-revert-3.jpg)
 ### `git stash`
-
+#### 의미
+- 기존의 staged 또는 unstaged 되어 있는 코드들을 stash(사물함)에 임시로 보관하는 명령어
+- 브랜치를 변경하는 경우에 반영되지 않은 변경사항이 없으면 브랜치 변경이 되지 않는 상황에 주로 사용
+- pop 명령어와 세트로 많이 씀
+#### GitKraken에서 사용법
+1. 작업중인 변경사항들이 있을 때, 위에 있는 Stash 버튼을 클릭한다.
+![Stash 1](../asset/image/git/git-stash-1.jpg)
+2. Stash에 변경사항들이 보관되고, Staged나 Unstaged 되어있는 변경사항이 없는 것을 확인한다.
+![Stash 2](../asset/image/git/git-stash-2.jpg)
 ### `git pop`
-
+#### 의미
+- stash(사물함)에 임시로 보관되어 있는 변경사항을 다시 불러오는 명령어
+#### GitKraken에서 사용법
+1. Stash를 우클릭한다. (또는 stash가 하나밖에 없을 때는 위의 pop 버튼을 눌러도 된다)
+![Pop 1](../asset/image/git/git-stash-2.jpg)
+2. Stash에 있던 변경사항들이 Unstaged Files와 Staged Files에 반영되는 것을 확인한다.
+![Pop 2](../asset/image/git/git-pop-1.jpg)
 ### `git branch`
-
+#### 의미
+- 브랜치 목록을 확인하는 명령어
+- CLI에서는 git branch -c 브랜치이름 명령으로 브랜치 생성도 가능하다.
+#### GitKraken에서 사용법
+1. 브랜치를 생성하고 싶은 커밋을 우클릭한다.
+   1. 만약 현재 바라보고 있는 커밋이 현재 브랜치에서 최신이라서 상단의 Branch 버튼을 눌러도 된다.
+2. Create Branch 메뉴를 클릭한다.
+3. 브랜치 이름을 입력하고 생성한다. (feature/DOCUMENT-2/test 처럼 '/'를 주면 브랜치 폴더로 인식한다.) 
+4. 브랜치가 정상적으로 생성되는지를 확인한다.
 ### `git checkout`
 
 ### `git merge`
