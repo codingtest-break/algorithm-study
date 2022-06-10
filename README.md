@@ -38,7 +38,7 @@ IT 대기업 취업 준비 및 알고리즘적 사고 향상을 위한 자료구
   - Email : hsykys0728@gmail.com
 - 신승찬
   - Github : [leebrobro](https://github.com/leebrobro)
-  - Email : 
+  - Email : ssgodda@naver.com
 
 ## 자료 및 레포 링크
   - [스터디 레포지토리](https://github.com/codingtest-break/algorithm-study)
