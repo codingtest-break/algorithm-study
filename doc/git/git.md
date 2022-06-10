@@ -52,8 +52,10 @@ tags: git git-flow study
       - [의미](#의미-11)
       - [GitKraken에서 사용법](#gitkraken에서-사용법-11)
     - [`git merge`](#git-merge)
+      - [의미](#의미-12)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-12)
+        - [목표 : main 브랜치에 있는 `Update README.md` 변경사항을 test 브랜치에 일괄적용(병합)하기](#목표--main-브랜치에-있는-update-readmemd-변경사항을-test-브랜치에-일괄적용병합하기)
     - [`git rebase`](#git-rebase)
-    - [`git cherry-pick`](#git-cherry-pick)
   - [Pull Request(PR)](#pull-requestpr)
   - [참고자료](#참고자료)
 
@@ -364,10 +366,33 @@ CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거�
 2. 브랜치가 변경된 것을 확인한다.
   ![Checkout 2](../asset/image/git/git-checkout-2.jpg)
 ### `git merge`
+#### 의미
+- A 브랜치와 A 브랜치에서 특정 커밋에서 생성되었던 B 브랜치가 있을 때, B 브랜치에서 작업한 커밋들을 A 브랜치에 일괄적용하는 명령어.
+> 사용하게 되는 상황 <br>
+> 보통 Git으로 협업을 하게 될 때는 실제로 배포가 되는(작업한 코드를 사용자가 사용하게 하는 행위) 코드를 직접 건드리지 않는다.(주로 master/main 브랜치)
+> 대신 main 브랜치에서 develop 브랜치를 생성하고, develop 브랜치에서 feature 브랜치들을 생성해서 변경사항들을 반영하는 식으로 협업한다.
+> 그리고 이러한 Git 관리방법을 Git-Flow라고 하며, 추후에 추가로 작성할 예정이다.
+> 따라서 Git-Flow를 따를 시에, feature 브랜치에서 변경사항들을 작업을 하고, 이를 develop 브랜치로 변경사항들을 병합(merge) 하는 방법으로 작업을 한다.
+> 즉, 이렇게 작업하는 이유는 기존의 잘 돌아가고 있는 코드를 변경하지 않고, 새로운 기능을 추가하거나 개선을 하기 위해서 이와 같은 방법을 사용한다.
 
+#### GitKraken에서 사용법
+##### 목표 : main 브랜치에 있는 `Update README.md` 변경사항을 test 브랜치에 일괄적용(병합)하기
+1. 지금 main 브랜치와 test 브랜치가 서로 다른 갈래로 뻗어나가고 있는 것을 확인할 수 있다.
+2. 자세히 보면 Merge branch 'release/v1.1.0' into main에서 부터 갈래가 달라진 것을 확인할 수 있다.
+3. 이는 main 브랜치는 `Update README.md` 커밋이 생성되었고, test 브랜치는 `DOCUMENT-2 Git 기초 활용법 문서 작성` 이라는 커밋이 생성되면서 서로 다른 갈래가 생기게 된 것이다.
+![Merge 1](../asset/image/git/git-merge-1.jpg)
+4. 그래서 main 브랜치의 README.md 커밋내용은 다음과 같다.
+![Merge 1-1](../asset/image/git/git-merge-1-1.png)
+5. 우리는 README.md 변경사항이 test에도 적용이 되기를 바라기 때문에 merge를 수행할 것이다.
+6. merge를 할때는 방향이 중요하다. 우리는 **main**의 변경사항이 **test** 에 적용되기를 원하므로, **main 브랜치를 끌어다가 test 브랜치에 놓는다**
+![Merge 2](../asset/image/git/git-merge-2.png) 
+7. 그러면 다음과 같은 메뉴가 나타나고 Merge main into test를 선택한다.(반대로 하면 **test**의 변경사항들 중 **main**에 반영되지 않은 내용들이 반영된다.)
+![Merge 3](../asset/image/git/git-merge-3.png)
+8. merge가 완료되었음을 커밋이 생성된 것으로 확인한다.
+![Merge 4](../asset/image/git/git-merge-4.jpg)
+9. main 브랜치를 merge의 커밋의 내용은 *test* 브랜치에 없던 `Update README.md` 커밋의 내용과 일치하는 것을 볼 수 있다.
+![Merge 5-1](../asset/image/git/git-merge-5-1.png)
 ### `git rebase`
-
-### `git cherry-pick`
 
 ## Pull Request(PR)
 
