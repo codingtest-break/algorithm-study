@@ -14,21 +14,55 @@ tags: git git-flow study
   - [Git 사용 환경](#git-사용-환경)
   - [Git 기본 용어 설명](#git-기본-용어-설명)
   - [자주 쓰는 Git 명령어 설명](#자주-쓰는-git-명령어-설명)
+    - [GitKraken에서 Github 계정 연동 방법](#gitkraken에서-github-계정-연동-방법)
     - [`git init`](#git-init)
+      - [의미](#의미)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법)
     - [`git clone`](#git-clone)
+      - [의미](#의미-1)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-1)
     - [`git add`](#git-add)
+      - [의미](#의미-2)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-2)
+    - [`git commit`](#git-commit)
+      - [의미](#의미-3)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-3)
     - [`git push`](#git-push)
+      - [의미](#의미-4)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-4)
     - [`git pull`](#git-pull)
+      - [의미](#의미-5)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-5)
     - [`git reset`](#git-reset)
+      - [의미](#의미-6)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-6)
     - [`git revert`](#git-revert)
+      - [의미](#의미-7)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-7)
     - [`git stash`](#git-stash)
+      - [의미](#의미-8)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-8)
     - [`git pop`](#git-pop)
+      - [의미](#의미-9)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-9)
     - [`git branch`](#git-branch)
+      - [의미](#의미-10)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-10)
     - [`git checkout`](#git-checkout)
+      - [의미](#의미-11)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-11)
     - [`git merge`](#git-merge)
+      - [의미](#의미-12)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-12)
+        - [목표 : main 브랜치에 있는 `Update README.md` 변경사항을 test 브랜치에 일괄적용(병합)하기](#목표--main-브랜치에-있는-update-readmemd-변경사항을-test-브랜치에-일괄적용병합하기)
     - [`git rebase`](#git-rebase)
-    - [`git cherry-pick`](#git-cherry-pick)
+      - [의미](#의미-13)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-13)
+        - [목적 : rebase-example 브랜치를 test 브랜치로 rebase 하기](#목적--rebase-example-브랜치를-test-브랜치로-rebase-하기)
+        - [상황 : test 브랜치의 커밋에서 생성된 rebase-example 브랜치에서 작업을 하던 중, test에 다른 사람의 작업 사항이 머지됨](#상황--test-브랜치의-커밋에서-생성된-rebase-example-브랜치에서-작업을-하던-중-test에-다른-사람의-작업-사항이-머지됨)
   - [Pull Request(PR)](#pull-requestpr)
+      - [의미](#의미-14)
+      - [GitKraken에서 사용법](#gitkraken에서-사용법-14)
   - [참고자료](#참고자료)
 
 
@@ -137,41 +171,297 @@ GitKraken을 사용하는 이유는 GUI 환경에서 Git을 가장 잘 활용할
 CLI 환경에서 사용하는 방법은 추후에 문서를 업데이트 하거나, 참고 링크를 추가하도록 하겠다.
 
 ## Git 기본 용어 설명
+- Branch
+  - 변경사항들(Commit)을 관리하는 단위
+  - 평행세계라는 메타포를 생각하면 이해하기 쉽다.
+  > <img src="./../asset/image/git/info-icon-png-transparent-13.jpg" alt="drawing" style="width:30px; float: left; margin-right: 5px"/>
+  > 우리 인생은 하나의 큰 브랜치라고 생각할 수 있고, 인생 중 선택의 기로에 있는 경우를 브랜치를 생성해야 하는 상황으로 비유할 수 있다.
+  > 또한 커밋은 그 하나하나의 사건이라고 비유해볼 수 있다.<br>
+  > 예시 <br>
+  > 만약 오후 1시에 점심을 먹는 사건이 있었다고 해보자.<br>
+  > 여기서 오후 1시에 짜장면을 먹을지, 짬뽕을 먹을지 고민을 하고 있는 상황이 있었다고 가정해보자. <br>
+  > 이 때, 우리가 짜장면을 먹는 상황을 git으로 표현하면, '점심-짜장면' 브랜치를 생성해서 '짜장면을 먹었다'라는 커밋이 생성되었다고도 볼 수 있다. <br>
+  > 반면에 우리가 짬뽕을 먹는 상황을 git으로 표현하면, '점심-짬뽕' 브랜치를 생성해서 '짬뽕을 먹었다'라는 커밋을 생성했다고 볼 수 있다. <br>
+  > 여기서 중요한 것은 브랜치와 브랜치 사이에는 서로에게 영향을 미치는 명령을 사용하지 않는 이상(merge 나 rebase 등) 독립적으로 흘러가게 된다.<br>
+  > 우리가 짜장면을 먹는 브랜치에서는 짜장면을 점심으로 먹었고, 짬뽕을 먹는 브랜치에서는 짬뽕을 먹었지만, 점심 자체는 각 브랜치에서 1번씩만 먹은 것이지, 점심을 2번 먹은 것이 아니기 때문이다.
 
+- Working directory
+  - 실제 파일들이 있는 디렉토리(폴더)
+- Staging Area
+  - Git 디렉토리에서 변경사항들을 확정하기 전에 반영할 내용들을 임시로 저장하는 영역.
+- Commit
+  - Staging Area에 존재하는 변경사항들이 확정된 상태
+  - 또는 Staging Area에 존재하는 변경사항들을 확정시키는 명령어 이기도 하다.
+- checkout
+  - Branch에서 다른 브랜치로 이동하는 명령어
+- HEAD
+  - 현재 바라보고 있는 커밋을 가리키는 포인터
+  - 기본적으로 브랜치를 checkout 했을 때, 디폴트로 가장 마지막 커밋을 가리키고 있는다.
+  - 각 브랜치의 마지막 커밋이 아닌 개별적인 커밋을 보게되면 HEAD가 이동하게 된다.
+- Conflict
+  - 코드가 충돌이 나는 상황
+  - 서로 다른 브랜치에서 같은 파일, 같은 라인에 다른 내용이 포함되어 있어서 코드를 자연스럽게 합치지 못하는 상황.
+  - Git의 입장에서는 어떤 코드를 버리고 어떤 코드를 가져가야 할 지 알 수 없기 때문에 사람이 직접 어떤 코드를 반영할지 수정해야 한다. 
+- Origin & Upstream
+  - 내 Github 계정에 있는 레포지토리를 origin이라고 한다.
+  - 처음 생성한 레포지토리 관리자가 나라면 upstream은 신경을 쓰지 않아도 된다.
+  - 만약 다른 레포지토리의 **collaborator**(해당 레포지토리에 코드를 반영할 수 있는 권한이 있는 사람)가 아니면, `fork`라는 기능으로 다른 사람의 레포지토리를 내 Github 레포지토리로 가져올 수 있는데, 이때 fork를 한 원래 레포지토리가 `upstream` fork 해서 내 계정 밑으로 생성된 레포지토리가 `origin`이 된다.
 ## 자주 쓰는 Git 명령어 설명
-
+- Git에서 명령어의 의미와, GitKraken에서 해당 명령어를 실행하는 방법으로 알아본다.
+### GitKraken에서 Github 계정 연동 방법
+1. File 탭에서 Preferences 클릭(Mac OS는 상단의 GitKraken 클릭 후 Preferences 클릭)
+2. Integrations 탭에서 Github 클릭
+3. Connect to Github 버튼 클릭
+![github-integration-with-gitkraken-1](../asset/image/git/github-integration-with-gitkraken-1.png)
+4. 웹브라우저에서 Continue authorization 클릭
+![github-integration-with-gitkraken-2](../asset/image/git/github-integration-with-gitkraken-2.png)
+5. Github 로그인
+![github-integration-with-gitkraken-3](../asset/image/git/github-integration-with-gitkraken-3.png)
+6. Success 확인
+![github-integration-with-gitkraken-4](../asset/image/git/github-integration-with-gitkraken-4.png)
+6. 연동 성공 확인
+![github-integration-with-gitkraken-5](../asset/image/git/github-integration-with-gitkraken-5.png)
 ### `git init`
-
+#### 의미
+- 현재 있는 폴더를 git 저장소로(local) 사용하도록 하는 명령어
+#### GitKraken에서 사용법
+1. Start a local repo 클릭
+![Click Start a local repo](./../asset/image/git/git-init-1.jpg)
+1. Local Only로 만드는 경우
+![Create Local repo](./../asset/image/git/git-init-2.png)
+   1. Name 입력
+   2. 만들고자하는 디렉토리 설정(Initialize in)
+   3. Create Repository 클릭
+2. Github에 Remote를 생성하면서 만드는 경우
+![Create Local Repo with Github](../asset/image/git/git-init-2-1.png)
+   1. Github.com 클릭
+   2. 추가하고자 하는 Account 선택
+   3. Github 레포지토리 Description에 추가할 내용 작성
+   4. Access 유형 (Public/Private, Private은 Pro 버전 필요) 선택
+   5. 컴퓨터에 레포지토리가 clone 될 경로 선택
+   6. Create Repository and Clone 클릭
 ### `git clone`
-
+#### 의미
+- Remote Repository를 컴퓨터로 복사 해오는 명령어
+#### GitKraken에서 사용법
+1. Clone a repo 클릭
+![Clone a repo 1](../asset/image/git/git-clone-1.jpg)
+2. Clone 하기
+   1. GitHub.com 클릭
+   ![Clone a repo 2](../asset/image/git/git-clone-2.png)
+      1. 내 계정의 Repo에서 clone할 레포 선택 후 Clone the repo! 클릭
+   2. Clone with URL 선택
+   ![Clone a repo 2-1](../asset/image/git/git-clone-2-1.png)
+      1. clone할 레포의 URL을 입력하고 Clone the repo! 클릭
 ### `git add`
-
+#### 의미
+- commit을 찍기 전에(변경 사항들을 확정 짓기 전에), commit에 반영할 내용들을 Staging area에 추가하는 명령어
+#### GitKraken에서 사용법
+1. 기본적으로 변경사항이 있는 파일들을 tracking해서 Unstaged Files에서 확인 가능
+![Add 1](../asset/image/git/git-add-1.jpg)
+2. 개별 파일을 Unstaged Files에서 선택해서 Stage File 클릭시 파일 전체의 변경 사항이 추가됨.
+   1. 개별 파일에서 일부분만 add 하고 싶을 경우 Stage Hunk를 클릭하면 됨.  
+  ![Add 2](../asset/image/git/git-add-2.jpg)
+   1. Staged Files 에서 해당 파일이 add 되어 있는 것을 확인 가능.
+  ![Add 3](../asset/image/git/git-add-3.jpg)
+3. 변경 된 모든 파일들을 add 하고 싶을 경우 Stage all changes 버튼 클릭
+  ![Add 4](../asset/image/git/git-add-4.jpg)
+  1. 모든 변경사항 들이 add 되어 있는 것을 확인 가능. 
+  ![Add 5](../asset/image/git/git-add-5.jpg)
+### `git commit`
+#### 의미
+- 변경 사항들을 commit이라는 단위로 관리 하도록 확정 짓는 명령어
+#### GitKraken에서 사용법
+1. Commit Message 칸의 Summary(필수), Description(선택) 작성하기
+![Commit 1](../asset/image/git/git-commit-1.jpg)
+2. 작성 후 하단의 Commit Changes to n files 클릭
+![Commit 2](../asset/image/git/git-commit-2.jpg)
+3. Commit이 생성된 것을 확인 가능
+![Commit 3](../asset/image/git/git-commit-3.jpg)
 ### `git push`
-
+#### 의미
+- 로컬 레포지토리의 commit을 리모트 레포지토리(Github)에 반영하는 명령어
+- push 와 pull을 비교해서 알아두자.
+- 내 컴퓨터의 변경사항을 리모트로 밀어올려서 push.
+#### GitKraken에서 사용법
+1. 상단의 push 버튼 클릭
+![Push 1](../asset/image/git/git-push-1.jpg)
+2. 리모트에 해당 브랜치가 없는 경우 위와 같이 리모트에 브랜치 생성도 동시에 진행하게 된다.
+![Push 2](../asset/image/git/git-push-2.jpg)
+3. push 완료 시, Origin 모양이 추가되었음을 확인 가능하다.(Github에 해당 브랜치가 push 되었음을 확인)
+![Push 3](../asset/image/git/git-push-3.png)
 ### `git pull`
-
+#### 의미
+- 리모트 레포지토리의 변경사항들을 로컬 레포지토리에 반영하는 명령어 
+- 리모트의 변경사항을 내 컴퓨터로 땡겨오기 때문에 pull.
+#### GitKraken에서 사용법
+1. 리모트 레포지토리와 로컬 레포지토리 사이에 커밋이 차이나는 경우
+2. 상단의 pull 버튼을 누른다.
+![Pull 1](../asset/image/git/git-pull-1.png)
+3. 리모트 레포지토리와 로컬 레포지토리가 같은 커밋을 참조하는지 확인한다.
+![Pull 2](../asset/image/git/git-pull-2.png)
 ### `git reset`
-
+#### 의미
+- 반영했던 커밋들을 **없애고** 이전의 커밋으로 돌아가는 명령어
+- reset 명령어는 soft, mixed, hard 순으로 정도가 있음
+- soft는 돌아갈 커밋까지의 변경사항들이 전부 staged된 상태로 돌아감.
+- mixed는 돌아갈 커밋까지의 변경사항들이 전부 unstaged된 상태로 돌아감.
+- hard는 돌아갈 커밋까지의 변경사항들을 전부 지워버림.
+- Revert와 비슷하지만 커밋 자체를 없애버리는 식으로 진행되는 것이기 때문에 다른 사람과 협업 시에 유의해야함.
+#### GitKraken에서 사용법
+1. reset 공통
+   1. 돌아가고자 하는 커밋을 오른쪽 버튼으로 클릭
+  ![Reset 1](../asset/image/git/git-reset-1.png)
+   2. Reset (branch Name) to this commit 클릭
+  ![Reset 2](../asset/image/git/git-reset-2.png)
+   3. 원하는 reset 정도를 선택
+  ![Reset 3](../asset/image/git/git-reset-3.png)
+2. soft
+   1. 돌아가고자 하는 커밋 이후의 변경사항들이 Staged Files에 있는 것을 확인 가능.
+     ![Reset 4-1](../asset/image/git/git-reset-4-1.jpg)
+3. mixed
+   1. 돌아가고자 하는 커밋 이후의 변경사항들이 Unstaged Files에 있는 것을 확인 가능.
+     ![Reset 4-2](../asset/image/git/git-reset-4-2.jpg)
+4. hard
+   1. 돌아가고자 하는 커밋 이후의 변경사항들이 없어진 것을 확인 가능.
+     ![Reset 4-3](../asset/image/git/git-reset-4-3.jpg)
 ### `git revert`
-
+#### 의미
+- 반영했던 커밋을 취소하는 커밋을 생성해서 변경사항을 취소하는 명령어
+- Reset은 실제로 커밋을 삭제하지만 Revert는 취소 커밋을 생성하는 방식(무르기와 비슷함)
+- 여러명이 **같은 브랜치**에서 작업을 하고 있는 경우라면 Revert를 사용하는 것을 권장.
+#### GitKraken에서 사용법
+1. Revert하고자 하는 커밋에 오른쪽 버튼 클릭
+2. Revert commit을 클릭
+![Revert 1](../asset/image/git/git-revert-1.png)
+3. 위의 dialog에서 yes를 클릭
+![Revert 2](../asset/image/git/git-revert-2.jpg)
+4. 선택한 커밋의 변경사항들을 취소하는 커밋이 생성되는 것을 확인
+![Revert 3](../asset/image/git/git-revert-3.jpg)
 ### `git stash`
-
+#### 의미
+- 기존의 staged 또는 unstaged 되어 있는 코드들을 stash(사물함)에 임시로 보관하는 명령어
+- 브랜치를 변경하는 경우에 반영되지 않은 변경사항이 없으면 브랜치 변경이 되지 않는 상황에 주로 사용
+- pop 명령어와 세트로 많이 씀
+#### GitKraken에서 사용법
+1. 작업중인 변경사항들이 있을 때, 위에 있는 Stash 버튼을 클릭한다.
+![Stash 1](../asset/image/git/git-stash-1.jpg)
+2. Stash에 변경사항들이 보관되고, Staged나 Unstaged 되어있는 변경사항이 없는 것을 확인한다.
+![Stash 2](../asset/image/git/git-stash-2.jpg)
 ### `git pop`
-
+#### 의미
+- stash(사물함)에 임시로 보관되어 있는 변경사항을 다시 불러오는 명령어
+#### GitKraken에서 사용법
+1. Stash를 우클릭한다. (또는 stash가 하나밖에 없을 때는 위의 pop 버튼을 눌러도 된다)
+![Pop 1](../asset/image/git/git-stash-2.jpg)
+2. Stash에 있던 변경사항들이 Unstaged Files와 Staged Files에 반영되는 것을 확인한다.
+![Pop 2](../asset/image/git/git-pop-1.jpg)
 ### `git branch`
-
+#### 의미
+- 브랜치 목록을 확인하는 명령어
+- CLI에서는 git branch -c 브랜치이름 명령으로 브랜치 생성도 가능하다.
+#### GitKraken에서 사용법
+1. 브랜치를 생성하고 싶은 커밋을 우클릭한다.
+   1. 만약 현재 바라보고 있는 커밋이 현재 브랜치에서 최신이라서 상단의 Branch 버튼을 눌러도 된다.
+   2. Create Branch 메뉴를 클릭한다.
+   ![Branch 1](../asset/image/git/git-branch-1.png)
+2. 브랜치 이름을 입력하고 생성한다. (feature/DOCUMENT-2/test 처럼 '/'를 주면 브랜치 폴더로 인식한다.) 
+  ![Branch 2](../asset/image/git/git-branch-2.jpg)
+3. 브랜치가 정상적으로 생성되는지를 확인한다.
+  ![Branch 3](../asset/image/git/git-branch-3.jpg)
 ### `git checkout`
-
+#### 의미
+- 현재 작업하고 있는 브랜치를 옮길 때 사용하는 명령어
+#### GitKraken에서 사용법
+1. 옮기고 싶은 브랜치 이름을 더블 클릭한다.
+  ![Checkout 1](../asset/image/git/git-checkout-1.jpg)
+2. 브랜치가 변경된 것을 확인한다.
+  ![Checkout 2](../asset/image/git/git-checkout-2.jpg)
 ### `git merge`
+#### 의미
+- A 브랜치와 A 브랜치에서 특정 커밋에서 생성되었던 B 브랜치가 있을 때, B 브랜치에서 작업한 커밋들을 A 브랜치에 일괄적용하는 명령어.
+- rebase와 비슷하지만 목적이 다르다.
+- 방향이 중요하다.
+> 사용하게 되는 상황 <br>
+> 보통 Git으로 협업을 하게 될 때는 실제로 배포가 되는(작업한 코드를 사용자가 사용하게 하는 행위) 코드를 직접 건드리지 않는다.(주로 master/main 브랜치)
+> 대신 main 브랜치에서 develop 브랜치를 생성하고, develop 브랜치에서 feature 브랜치들을 생성해서 변경사항들을 반영하는 식으로 협업한다.
+> 그리고 이러한 Git 관리방법을 Git-Flow라고 하며, 추후에 추가로 작성할 예정이다.
+> 따라서 Git-Flow를 따를 시에, feature 브랜치에서 변경사항들을 작업을 하고, 이를 develop 브랜치로 변경사항들을 병합(merge) 하는 방법으로 작업을 한다.
+> 즉, 이렇게 작업하는 이유는 기존의 잘 돌아가고 있는 코드를 변경하지 않고, 새로운 기능을 추가하거나 개선을 하기 위해서 이와 같은 방법을 사용한다.
 
+#### GitKraken에서 사용법
+##### 목표 : main 브랜치에 있는 `Update README.md` 변경사항을 test 브랜치에 일괄적용(병합)하기
+1. 지금 main 브랜치와 test 브랜치가 서로 다른 갈래로 뻗어나가고 있는 것을 확인할 수 있다.
+2. 자세히 보면 Merge branch 'release/v1.1.0' into main에서 부터 갈래가 달라진 것을 확인할 수 있다.
+3. 이는 main 브랜치는 `Update README.md` 커밋이 생성되었고, test 브랜치는 `DOCUMENT-2 Git 기초 활용법 문서 작성` 이라는 커밋이 생성되면서 서로 다른 갈래가 생기게 된 것이다.
+![Merge 1](../asset/image/git/git-merge-1.jpg)
+4. 그래서 main 브랜치의 README.md 커밋내용은 다음과 같다.
+![Merge 1-1](../asset/image/git/git-merge-1-1.png)
+5. 우리는 README.md 변경사항이 test에도 적용이 되기를 바라기 때문에 merge를 수행할 것이다.
+6. merge를 할때는 방향이 중요하다. 우리는 **main**의 변경사항이 **test** 에 적용되기를 원하므로, **main 브랜치를 끌어다가 test 브랜치에 놓는다**
+![Merge 2](../asset/image/git/git-merge-2.png) 
+7. 그러면 다음과 같은 메뉴가 나타나고 Merge main into test를 선택한다.(반대로 하면 **test**의 변경사항들 중 **main**에 반영되지 않은 내용들이 반영된다.)
+![Merge 3](../asset/image/git/git-merge-3.png)
+8. merge가 완료되었음을 커밋이 생성된 것으로 확인한다.
+![Merge 4](../asset/image/git/git-merge-4.jpg)
+9. main 브랜치를 merge의 커밋의 내용은 *test* 브랜치에 없던 `Update README.md` 커밋의 내용과 일치하는 것을 볼 수 있다.
+![Merge 5-1](../asset/image/git/git-merge-5-1.png)
 ### `git rebase`
+#### 의미
+- 내가 작업을 반영해야하는 브랜치에 다른 변경사항이 병합되어 내 브랜치에 최신화를 하기 위한 명령어이다.
+- merge와 비슷하게도 볼 수 있지만 목적이 다르다.
+- rebase도 merge와 동일하게 방향이 중요하다.
+- 즉, **내가 작업하던 브랜치의 base(작업을 반영해야하는 브랜치의 시작 커밋)을 최신 버전으로 다시(re) 최신화** 하는 명령어이다.
+> **Rebase가 필요한 상황 예시**
+> 
+> 개발자 A, B, C가 각각 게시판 생성, 게시판 글 작성, 회원가입 기능을 개발하는 상황이라고 가정해보자.
+> 처음 개발 시작시에는 같은 develop 브랜치의 최신 커밋에서 브랜치를 생성한 상황이다.
+> 이 때, A 개발자가 제일 먼저 개발을 완료해서 develop에 자신의 코드를 머지하였다.
+> 그럼 B와 C는 최신의 develop에서 개발을 하는 것이 아닌, 구버전의 develop에서 개발을 진행하고 있는 상황이 된다.
+> 이런 상태에서 B와 C가 rebase가 없이 자신의 코드를 계속 작업하다가 나중에 merge를 하려하면 많은 코드들이 conflict가 날 수 있다.
+> 왜냐하면 A가 작업한 코드의 부분이 B와 C가 작성을 하는 부분을 같이 건드렸을 수도 있기 때문이다.
+> 따라서 rebase의 목적은 자신의 코드가 반영되어야 하는 브랜치가 변경되었을 때, 동기화를 하는 목적으로 사용하는 것이다.
+#### GitKraken에서 사용법
+##### 목적 : rebase-example 브랜치를 test 브랜치로 rebase 하기
+##### 상황 : test 브랜치의 커밋에서 생성된 rebase-example 브랜치에서 작업을 하던 중, test에 다른 사람의 작업 사항이 머지됨
+![Rebase 상황 설명](../asset/image/git/git-rebase-1.jpg)
 
-### `git cherry-pick`
-
+---
+1. 방향이 중요하다. **rebase-example의 base를 test의 최신 커밋으로 갱신** 하는 것이기 때문에, rebase-example 브랜치를 test 브랜치로 끌어다 놓는다.
+![Rebase 1](../asset/image/git/git-rebase-2.png)
+2. 끌어다 놓고 `Rebase rebase-example onto test`를 클릭한다.
+![Rebase 2](../asset/image/git/git-rebase-3.png)
+3. **rebase-example 브랜치의 시작 커밋**이 **test 브랜치의 최신 커밋인 `Merge branch 'main' into test`** 로 변경된 것을 확인 할 수 있다.
+![Rebase 3](../asset/image/git/git-rebase-4.jpg)
 ## Pull Request(PR)
-
+#### 의미
+- 내가 권한이 없는 프로젝트에 기여하고 싶을 때(코드 추가 및 수정, 번역 작업, 코멘트 추가 등등), 내가 수정한 변경사항의 반영을 요청하는 방법.
+- fork한 레포지토리에서 변경사항을 반영하고, 해당 변경사항들의 내용과 작업 이유 등등을 적어서, collaborator에게 반영해달라고 요청하게 된다.
+- 승인이 될 경우, 해당 코드가 반영이 되게 된다.
+- 주로 코드 리뷰를 하면서 협업을 할 때도 사용된다. 
+#### GitKraken에서 사용법
+1. PR(Pull Request)를 보낼 변경사항을 작업한 브랜치의 이름을 오른쪽 클릭한다.
+2. Push 브랜치이름 and start a pull request 클릭
+![PR 1](../asset/image/git/pr-1.png)
+3. Local 브랜치만 있는 경우 위의 dialog가 나오나, Submit을 눌러준다.(브랜치를 origin에 생성하게 된다)
+![PR 2](../asset/image/git/pr-2.png)
+4. 다음과 같은 창이 뜬다.
+5. To repo에 반영할 Repository를 선택한다.(주로 Upstream을 선택할 것이다.) 
+   1. 레포지토리 안에 `pull_request_template.md` 파일이 있는 경우 PR 내용을 템플릿화 해서 사용 가능하다.
+![PR 3](../asset/image/git/pr-3.png)
+6. 내용을 작성하고 Create Pull Request를 누른다.
+ ![PR 4](../asset/image/git/pr-4.jpg)
+7. Github에서 Pull requests 에서 내 PR을 확인 가능하다.(upstream에 PR을 날린경우, 내 레포가 아니라 연결된 원본 레포로 가서 확인할 수 있다.)  
+![PR 5](../asset/image/git/pr-5.jpg)
+![PR 6](../asset/image/git/pr-6.jpg)
+8. 잘 보이는 지 확인한다.
+![PR 7](../asset/image/git/pr-7.png)
 ## 참고자료
 - [Git 간편 안내서](https://rogerdudler.github.io/git-guide/index.ko.html)
 - [nomadcoder 강의](https://nomadcoders.co/git-for-beginners)
 - [생활코딩 Git 강의](https://opentutorials.org/module/3733)
 - [Git vs SVN](https://velog.io/@lzhxxn/Git-이란)
+- [Git의 기본 개념들 (1)](https://velog.io/@janeljs/git-4)
+- [Git HEAD란 무엇인가?](https://kotlinworld.com/272)
+- [Git에 대한 내용 정리](https://dimdim.tistory.com/entry/GIT%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%B4%EC%9A%A9%EC%A0%95%EB%A6%AC-%EC%A0%95%EB%A6%AC%EC%A4%91)
+- [git의 upstream과 origin 헷갈리는 사람 손!](https://dev200ok.blogspot.com/2020/09/git-git-upstream-origin.html)
