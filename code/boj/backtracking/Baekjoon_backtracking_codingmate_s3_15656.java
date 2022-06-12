@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Baekjoon_backtracking_s3_15656 {
+public class Baekjoon_backtracking_codingmate_s3_15656 {
 
     static StringBuilder result = new StringBuilder();
     static List<Integer> stack = new ArrayList<>();
@@ -56,8 +56,6 @@ public class Baekjoon_backtracking_s3_15656 {
 
         for (int toIdx : graph.get(fromIdx))
             if ( stack.size() < M 
-              //&& stack.indexOf(toIdx) == -1 
-              //&& numberList.get(fromIdx) <= numberList.get(toIdx)
                )
                 dfs(toIdx);
 

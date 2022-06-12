@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Baekjoon_backtracking_s3_15654 {
+public class Baekjoon_backtracking_codingmate_s3_15654 {
 
     static StringBuilder result = new StringBuilder();
     static List<Integer> stack = new ArrayList<>();

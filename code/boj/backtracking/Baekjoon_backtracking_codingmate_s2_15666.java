@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Baekjoon_backtracking_s2_15666 {
+public class Baekjoon_backtracking_codingmate_s2_15666 {
 
     static StringBuilder result = new StringBuilder();
     static List<Integer> stack = new ArrayList<>();
@@ -47,12 +47,7 @@ public class Baekjoon_backtracking_s2_15666 {
                 if ( toIdx == numberList.indexOf(toNum) )
                     toIdxList.add(toIdx);
             } // for
-            //System.out.println(toIdxList);
         }
-
-        // System.out.println("numberList : " + numberList);
-        // System.out.println("distinctNumberList : " + distinctNumberList);
-        // System.out.println("duplicatedNumberList : " + duplicatedNumberList);
         for (int startIdx = 0; startIdx < distinctNumberList.size(); startIdx++)
             dfs(numberList.indexOf(distinctNumberList.get(startIdx)));
 
@@ -64,7 +59,6 @@ public class Baekjoon_backtracking_s2_15666 {
 
     public static void dfs(int fromIdx) {
         stack.add(fromIdx);
-        //System.out.println(stack);
         int fromNum = numberList.get(fromIdx);
         for (int toIdx : graph.get(fromIdx)) {
             int toNum = numberList.get(toIdx);
