@@ -1,5 +1,3 @@
-package code.boj.backtracking;
-
 import java.io.*;
 import java.util.*;
 

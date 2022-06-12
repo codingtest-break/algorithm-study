@@ -1,7 +1,9 @@
+package io;
+
 import java.io.*;
 import java.util.*;
 
-class Main {
+class Main_11022 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine());
